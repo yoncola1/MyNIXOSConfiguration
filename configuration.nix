@@ -6,12 +6,14 @@
   ];
 
   boot.loader = {
-    efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = false;
     systemd-boot.enable = false;
     grub = {
       enable = true;
       device = "nodev";
       efiSupport = true;
+      efiInstallAsRemovable = true;
+      configurationLimit = 10;
     };
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -33,6 +35,8 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
+  systemd.defaultUnit = "graphical.target";
+
   services.xserver.enable = true;
   services.xserver.xkb = {
     layout = "us";
@@ -40,7 +44,7 @@
   };
 
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.wayland.enable = false;
   services.displayManager.sddm.settings.Theme = {
     CursorTheme = "Bibata-Modern-Classic";
     CursorSize = 24;
