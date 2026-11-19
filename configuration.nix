@@ -41,6 +41,35 @@
     after = [ "systemd-udev-settle.service" ];
   };
 
+  systemd.services.zapret-discord-youtube = {
+    description = "Zapret Discord/YouTube DPI circumvention service";
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "NetworkManager-wait-online.service" ];
+    path = with pkgs; [
+      bash
+      coreutils
+      curl
+      git
+      gawk
+      gnugrep
+      gnused
+      iproute2
+      nftables
+      procps
+      util-linux
+    ];
+    serviceConfig = {
+      Type = "simple";
+      User = "root";
+      WorkingDirectory = "/home/yoncola/zapret-discord-youtube-linux";
+      ExecStart = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh daemon";
+      ExecStop = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh kill";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  };
+
   services.xserver.enable = true;
   services.xserver.xkb = {
     layout = "us";
