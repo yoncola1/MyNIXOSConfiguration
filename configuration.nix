@@ -1,14 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.fsIdentifier = "provided";
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+    };
+  };
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos";
@@ -36,6 +41,20 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.settings.Theme = {
+    CursorTheme = "Bibata-Modern-Classic";
+    CursorSize = 24;
+  };
+
+  programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings."org/gnome/desktop/interface" = {
+        cursor-theme = "Bibata-Modern-Classic";
+        cursor-size = lib.gvariant.mkInt32 24;
+      };
+    }
+  ];
 
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
@@ -51,7 +70,7 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   services.power-profiles-daemon.enable = true;
@@ -85,12 +104,29 @@
     trash-cli
     librewolf
     vesktop
+    fastfetch
+    opencode
+    bibata-cursors
+    libxcursor
+    (pkgs.writeTextDir "share/icons/default/index.theme" ''
+      [Icon Theme]
+      Inherits=Bibata-Modern-Classic
+    '')
   ];
+
+  environment.pathsToLink = [ "/share/icons" ];
+
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+    HYPRCURSOR_THEME = "Bibata-Modern-Classic";
+    HYPRCURSOR_SIZE = "24";
+  };
 
   users.users.yoncola = {
     isNormalUser = true;
     description = "yoncola";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     shell = pkgs.fish;
   };
 
