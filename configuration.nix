@@ -95,5 +95,16 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  # Периодически удалять старые поколения и собранные ими store-пути.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
+  # Удалять неиспользуемые store-пути, не принадлежащие живым поколениям.
+  nix.settings.auto-optimise-store = true;
+
   system.stateVersion = "26.05";
 }
