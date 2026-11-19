@@ -12,6 +12,7 @@ in
   home.username = "yoncola";
   home.homeDirectory = "/home/yoncola";
   home.stateVersion = "26.05";
+  home.backupFileExtension = "backup";
 
   programs.caelestia = {
     enable = true;
