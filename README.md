@@ -1,0 +1,2 @@
+# MyNIXOSConfiguration
+My NixOS configuration
