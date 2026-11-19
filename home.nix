@@ -36,7 +36,9 @@ in
   programs.btop.enable = true;
   programs.fastfetch.enable = true;
   programs.foot.enable = true;
-  programs.fish.enable = true;
+
+  # Fish configuration is provided by the Caelestia dotfiles directory below.
+  # Do not enable programs.fish here: Home Manager would also manage config.fish.
 
   xdg.enable = true;
 
