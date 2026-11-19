@@ -13,7 +13,7 @@
 
 ```bash
 # 1. Клонируем репозиторий во временную директорию
-git clone https://github.com/yoncola1/MyNIXOSConfiguration.git /tmp
+git clone https://github.com/yoncola1/MyNIXOSConfiguration.git /tmp/nixos
 
 # 2. Переносим конфигурационные файлы в системную директорию NixOS
 sudo mv /tmp/MyNIXOSConfiguration /etc/nixos/
