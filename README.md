@@ -17,6 +17,9 @@ git clone https://github.com/yoncola1/MyNIXOSConfiguration.git /tmp
 
 # 2. Переносим конфигурационные файлы в системную директорию NixOS
 sudo mv /tmp/MyNIXOSConfiguration /etc/nixos/
+
+# 3. Приминяем конфигурацию командой:
+sudo nixos-rebuild switch --flake .#nixos
 ```
 
 ---
