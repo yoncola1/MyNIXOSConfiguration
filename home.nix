@@ -2,6 +2,7 @@
 
 let
   dotsDir = "${config.home.homeDirectory}/.local/share/caelestia";
+  dotsConfig = name: "${dotsDir}/${name}";
 in
 {
   imports = [
@@ -12,17 +13,12 @@ in
   home.homeDirectory = "/home/yoncola";
   home.stateVersion = "26.05";
 
-  programs.caelestia.enable = true;
-  programs.caelestia.cli.enable = true;
+  programs.caelestia = {
+    enable = true;
+    cli.enable = true;
+  };
 
   home.packages = with pkgs; [
-    foot
-    fish
-    fastfetch
-    btop
-    micro
-    thunar
-    starship
     eza
     zoxide
     direnv
@@ -40,7 +36,7 @@ in
   programs.btop.enable = true;
   programs.fastfetch.enable = true;
   programs.foot.enable = true;
-  programs.micro.enable = true;
+  programs.fish.enable = true;
 
   xdg.enable = true;
 
@@ -54,19 +50,24 @@ in
   '';
 
   xdg.configFile = {
-    "hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/hypr";
-    "fish".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/fish";
-    "foot".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/foot";
-    "fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/fastfetch";
-    "btop".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/btop";
-    "micro".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/micro";
-    "Thunar".source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/thunar";
+    "hypr".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "hypr");
+    "fish".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "fish");
+    "foot".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "foot");
+    "fastfetch".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "fastfetch");
+    "btop".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "btop");
+
+    # Home Manager's micro module also creates .config/micro/settings.json.
+    # Use one relative tree entry to avoid overlapping management of that path.
+    "micro" = {
+      source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "micro");
+      recursive = false;
+    };
+
+    "Thunar".source = config.lib.file.mkOutOfStoreSymlink (dotsConfig "thunar");
   };
 
   home.file.".config/starship.toml".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotsDir}/starship.toml";
+    config.lib.file.mkOutOfStoreSymlink (dotsConfig "starship.toml");
 
-  home.sessionVariables = {
-    CAELESTIA_DOTS = dotsDir;
-  };
+  home.sessionVariables.CAELESTIA_DOTS = dotsDir;
 }

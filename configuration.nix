@@ -39,8 +39,9 @@
 
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
-
   programs.steam.enable = true;
+  programs.fish.enable = true;
+
   hardware.graphics.enable = true;
 
   services.pipewire = {
@@ -60,7 +61,7 @@
     material-symbols
     rubik
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   environment.systemPackages = with pkgs; [
@@ -88,8 +89,6 @@
     shell = pkgs.fish;
   };
 
-  programs.fish.enable = true;
   nixpkgs.config.allowUnfree = true;
-
   system.stateVersion = "26.05";
 }
