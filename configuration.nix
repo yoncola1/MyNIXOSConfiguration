@@ -49,7 +49,10 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
 
   services.power-profiles-daemon.enable = true;
   services.dbus.enable = true;
@@ -80,6 +83,8 @@
     hyprpicker
     xdg-user-dirs
     trash-cli
+    librewolf
+    vesktop
   ];
 
   users.users.yoncola = {
