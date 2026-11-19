@@ -36,6 +36,10 @@
   };
 
   systemd.defaultUnit = "graphical.target";
+  systemd.services.display-manager = {
+    wants = [ "systemd-udev-settle.service" ];
+    after = [ "systemd-udev-settle.service" ];
+  };
 
   services.xserver.enable = true;
   services.xserver.xkb = {
@@ -45,6 +49,7 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = false;
+  services.displayManager.sddm.settings.General.DisplayServer = "x11";
   services.displayManager.sddm.settings.Theme = {
     CursorTheme = "Bibata-Modern-Classic";
     CursorSize = 24;
