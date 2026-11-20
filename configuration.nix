@@ -95,7 +95,7 @@
   ];
 
   programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
+  programs.hyprland.withUWSM = false;
   programs.steam.enable = true;
   programs.fish.enable = true;
 
@@ -145,6 +145,7 @@
     fastfetch
     opencode
     bibata-cursors
+    flatpak
     libxcursor
     (pkgs.writeTextDir "share/icons/default/index.theme" ''
       [Icon Theme]
