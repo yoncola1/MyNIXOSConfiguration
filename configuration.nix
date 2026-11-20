@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports = [
@@ -16,7 +16,14 @@
       configurationLimit = 10;
     };
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Use the Nixpkgs default kernel instead of the very recent latest kernel;
+  # this is a safer baseline for building the NVIDIA kernel module.
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+  ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -71,6 +78,7 @@
   };
 
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -96,10 +104,28 @@
 
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = false;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   programs.fish.enable = true;
 
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  hardware.nvidia = {
+    open = true;
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  
+  networking.extraHosts = ''
+    18.65.39.105 tr.rbxcdn.com
+  '';
+
 
   services.pipewire = {
     enable = true;
@@ -143,6 +169,7 @@
     librewolf
     vesktop
     fastfetch
+    pavucontrol
     opencode
     bibata-cursors
     flatpak
@@ -151,6 +178,7 @@
       [Icon Theme]
       Inherits=Bibata-Modern-Classic
     '')
+    inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher
   ];
 
   environment.pathsToLink = [ "/share/icons" ];

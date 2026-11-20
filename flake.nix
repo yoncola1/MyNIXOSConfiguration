@@ -13,6 +13,7 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    freesmlauncher.url = "github:FreesmTeam/FreesmLauncher/develop";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
