@@ -85,23 +85,22 @@ hl.config({
         kb_options = "grp:alt_shift_toggle",
     },
 })
--- Основной монитор (2K, 200 Гц, позиция 0x0)
-hl.monitor({
-    output    = "DP-2",
-    mode      = "2560x1440@194",
-    position  = "0x0",
-    scale     = 1,
-})
+# My monitors
+# hl.monitor({
+#     output    = "DP-2",
+#     mode      = "2560x1440@194",
+#     position  = "0x0",
+#     scale     = 1,
+# })
+# hl.monitor({
+#     output    = "DP-1",
+#     mode      = "1920x1080@144",
+#     position  = "-1080x-548",
+#     scale     = 1,
+#     transform = 1,
+# })
 
--- Второй монитор (FullHD, 144 Гц, поворот на 90°, позиция -1080x-548)
-hl.monitor({
-    output    = "DP-1",
-    mode      = "1920x1080@144",
-    position  = "-1080x-548",
-    scale     = 1,
-    transform = 1,
-})
-
+# Sensitivity
 hl.config({
     input = {
         sensitivity = -0.10,
