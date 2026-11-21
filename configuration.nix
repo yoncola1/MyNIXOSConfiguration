@@ -48,34 +48,35 @@
     after = [ "systemd-udev-settle.service" ];
   };
 
-  systemd.services.zapret-discord-youtube = {
-    description = "Zapret Discord/YouTube DPI circumvention service";
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" "NetworkManager-wait-online.service" ];
-    path = with pkgs; [
-      bash
-      coreutils
-      curl
-      git
-      gawk
-      gnugrep
-      gnused
-      iproute2
-      nftables
-      procps
-      util-linux
-    ];
-    serviceConfig = {
-      Type = "simple";
-      User = "root";
-      WorkingDirectory = "/home/yoncola/zapret-discord-youtube-linux";
-      ExecStart = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh daemon";
-      ExecStop = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh kill";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-  };
+# Zapret-discord-youtube, uncomment if you live in Russia, author: https://github.com/Sergeydigl3/zapret-discord-youtube-linux
+#  systemd.services.zapret-discord-youtube = {
+#    description = "Zapret Discord/YouTube DPI circumvention service";
+#    wantedBy = [ "multi-user.target" ];
+#    wants = [ "network-online.target" ];
+#    after = [ "network-online.target" "NetworkManager-wait-online.service" ];
+#    path = with pkgs; [
+#      bash
+#      coreutils
+#      curl
+#      git
+#      gawk
+#      gnugrep
+#      gnused
+#      iproute2
+#      nftables
+#      procps
+#      util-linux
+#    ];
+#    serviceConfig = {
+#      Type = "simple";
+#      User = "root";
+#      WorkingDirectory = "/home/yoncola/zapret-discord-youtube-linux";
+#      ExecStart = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh daemon";
+#      ExecStop = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh kill";
+#      Restart = "on-failure";
+#      RestartSec = 5;
+#    };
+#  };
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -131,10 +132,11 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  
-  networking.extraHosts = ''
-    18.65.39.105 tr.rbxcdn.com
-  '';
+
+# For working rbxcdn in Russia
+#  networking.extraHosts = ''
+#    18.65.39.105 tr.rbxcdn.com
+#  '';
 
 
   services.pipewire = {
@@ -178,7 +180,6 @@
     trash-cli
     # librewolf
     # vesktop
-    fastfetch
     pavucontrol
     # opencode
     bibata-cursors
