@@ -16,10 +16,13 @@
 git clone https://github.com/yoncola1/MyNIXOSConfiguration.git /tmp/nixos
 
 # 2. Переносим конфигурационные файлы в системную директорию NixOS
-sudo mv /tmp/nixos/* /etc/nixos/
+sudo mv /tmp/nixos/*.nix /etc/nixos/
 
 # 3. Приминяем конфигурацию командой:
 sudo nixos-rebuild switch --flake /etc/nixos#nixos
+
+# 4. По желанию:
+sudo mv /tmp/nixos/config.jsonc ~/.config/fastfetch ; sudo mv /tmp/nixos/hyprland.lua ~/.config/hypr
 ```
 
 ---
