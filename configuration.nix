@@ -18,7 +18,7 @@
   };
   # Use the Nixpkgs default kernel instead of the very recent latest kernel;
   # this is a safer baseline for building the NVIDIA kernel module.
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
@@ -84,7 +84,17 @@
     variant = "";
   };
 
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    package = pkgs.kdePackages.sddm;
+    theme = "sddm-astronaut-theme";
+    extraPackages = with pkgs; [
+      kdePackages.qtmultimedia
+      (sddm-astronaut.override {
+        embeddedTheme = "purple_leaves";
+      })
+    ];
+  };
   services.displayManager.sddm.wayland.enable = false;
   services.displayManager.sddm.settings.General.DisplayServer = "x11";
   services.displayManager.sddm.settings.Theme = {
@@ -174,6 +184,9 @@
     bibata-cursors
     flatpak
     libxcursor
+    (sddm-astronaut.override {
+      embeddedTheme = "purple_leaves";
+    })
     (pkgs.writeTextDir "share/icons/default/index.theme" ''
       [Icon Theme]
       Inherits=Bibata-Modern-Classic
@@ -204,6 +217,17 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 14d";
+  };
+
+  fileSystems."/mnt/disk" = {
+    device = "/dev/disk/by-uuid/d5b8e95c-b27c-44c6-bb4d-3d8e5986fca4";
+    fsType = "btrfs";
+    options = [
+      "defaults"
+      "nofail"        # чтобы система загрузилась, если диск отсоединят
+      "exec"          # обязательно для запуска игр/Proton с этого диска
+      "compress=zstd" # стандартное сжатие btrfs из NixOS Wiki
+    ];
   };
 
   # Удалять неиспользуемые store-пути, не принадлежащие живым поколениям.
