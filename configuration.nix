@@ -25,7 +25,7 @@
     "nvidia-drm.fbdev=1"
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "nixos-btw";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Samara";
 
@@ -176,13 +176,13 @@
     hyprpicker
     xdg-user-dirs
     trash-cli
-    librewolf
-    vesktop
+    # librewolf
+    # vesktop
     fastfetch
     pavucontrol
-    opencode
+    # opencode
     bibata-cursors
-    flatpak
+    # flatpak
     libxcursor
     (sddm-astronaut.override {
       embeddedTheme = "purple_leaves";
@@ -191,7 +191,7 @@
       [Icon Theme]
       Inherits=Bibata-Modern-Classic
     '')
-    inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher
+    # inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher
   ];
 
   environment.pathsToLink = [ "/share/icons" ];
@@ -205,7 +205,7 @@
 
   users.users.yoncola = {
     isNormalUser = true;
-    description = "yoncola";
+    description = "yoncola"; # Your username
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     shell = pkgs.fish;
   };
@@ -219,16 +219,17 @@
     options = "--delete-older-than 14d";
   };
 
-  fileSystems."/mnt/disk" = {
-    device = "/dev/disk/by-uuid/d5b8e95c-b27c-44c6-bb4d-3d8e5986fca4";
-    fsType = "btrfs";
-    options = [
-      "defaults"
-      "nofail"        # чтобы система загрузилась, если диск отсоединят
-      "exec"          # обязательно для запуска игр/Proton с этого диска
-      "compress=zstd" # стандартное сжатие btrfs из NixOS Wiki
-    ];
-  };
+  # My second disk
+  # fileSystems."/mnt/disk" = {
+  #  device = "/dev/disk/by-uuid/d5b8e95c-b27c-44c6-bb4d-3d8e5986fca4";
+  #  fsType = "btrfs";
+  #  options = [
+  #    "defaults"
+  #    "nofail"
+  #    "exec"
+  #    "compress=zstd"
+  #  ];
+  # };
 
   # Удалять неиспользуемые store-пути, не принадлежащие живым поколениям.
   nix.settings.auto-optimise-store = true;
