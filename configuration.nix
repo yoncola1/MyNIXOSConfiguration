@@ -27,7 +27,7 @@
 
   networking.hostName = "nixos-btw";
   networking.networkmanager.enable = true;
-  time.timeZone = "Europe/Samara";
+  time.timeZone = "Europe/Samara"; # <-- Set your time zone!
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
