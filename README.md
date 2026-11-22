@@ -1,7 +1,7 @@
 # ❄️ My NixOS Configuration
 
-![NixOS](https://shields.io)
-![Status](https://shields.io)
+![NixOS](https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=white)
+![Hyprland](https://img.shields.io/badge/Hyprland-1E66F5?logo=hyprland&logoColor=white)
 
 Моя персональная конфигурация операционной системы **NixOS**. Проект содержит настройки системы, декларативные пакеты и конфигурационные файлы для создания стабильного и воспроизводимого рабочего окружения.
 
@@ -12,27 +12,27 @@
 Чтобы скачать и установить эту конфигурацию на вашу систему, выполните следующие команды в терминале:
 
 ```bash
-# 1. Клонируем репозиторий во временную директорию
+# 1. Клонируем репозиторий во временную директорию (Clone repo in temporary directory)
 git clone https://github.com/yoncola1/MyNIXOSConfiguration.git /tmp/nixos
 
-# 2. Переносим конфигурационные файлы в системную директорию NixOS
+# 2. Переносим конфигурационные файлы в системную директорию NixOS (Move config files in system directory)
 sudo mv /tmp/nixos/*.nix /etc/nixos/
 
-# 3. Приминяем конфигурацию командой:
+# 3. Приминяем конфигурацию командой (Apply configuration command)
 sudo nixos-rebuild switch --flake /etc/nixos#nixos
 
-# 4. По желанию:
+# 4. По желанию (Optional)
 sudo mv /tmp/nixos/config.jsonc ~/.config/fastfetch ; sudo mv /tmp/nixos/hyprland.lua ~/.config/hypr
 ```
 
 ---
 
-## 🛠️ Применение изменений
+## 🛠️ Применение изменений 
 
 После того как файлы конфигурации окажутся в `/etc/nixos/`, вы можете применить их стандартной командой пересборки:
 
 ```bash
-sudo nixos-rebuild switch
+sudo nixos-rebuild switch --flake /etc/nixos#nixos
 ```
 
 > [!WARNING]
