@@ -1,3 +1,15 @@
+# ⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠳⠄⠙⢿
+# ⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀　　⠙⢿
+# ⣿⣿⡿⠁⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀　　　⢻
+# ⣿⡿⢠⠞⠉⠀⠀⠉⠳⡄⠀⠀⠀⠀⢀⡴⠚⠛⠛⠲⣄⠀⠀⠀　　　⣿
+# ⣿⠃⡟⠀⠀⢀⣤⡄⠀⢹⠀⠀⠀⢠⡏⠀⠀⠀⡀⠀⠈⣷⠀⠀⠀⠀　　⢸
+# ⡿⠀⣧⠀⠀⠈⠛⠃⠀⡼⠀⠀⠀⢸⡄⠀⠀⢿⡿⠀⠀⣼⢀⡤⠶⠶⢤⡀⠘⣿
+# ⡇⠀⠈⠷⣤⣀⣀⣤⠞⠁⠀⠀⠀⠀⢳⣄⠀⠀⠀⢀⣴⣿⠃⠀⠀⠀⣸⠇⠀⣿
+# ⣧⠈⢦⡀⠀⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⠋⠁⡇⠀⠀⠀⢠⡟⠀⢠
+# ⣿⡀⠀⠙⢶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣷⠀⠀⠀⠸⣧⠀⣼
+# ⣿⣧⠀⠀⠀⠈⠙⠛⠷⢶⣤⣤⣤⣤⣤⣴⡶⢾⡟⠉⠀⠀⠀⠀⠀⠀⢻
+# ⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⠀⠀ ⣿
+
 { config, pkgs, inputs, lib, ... }:
 
 {
@@ -41,41 +53,41 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  systemd.defaultUnit = "graphical.target";
+  systemd.defaultUnit = "graphical.target";  # Openrc better
   systemd.services.display-manager = {
     wants = [ "systemd-udev-settle.service" ];
     after = [ "systemd-udev-settle.service" ];
   };
 
-# Zapret-discord-youtube, uncomment if you live in Russia, author: https://github.com/Sergeydigl3/zapret-discord-youtube-linux
-#  systemd.services.zapret-discord-youtube = {
-#    description = "Zapret Discord/YouTube DPI circumvention service";
-#    wantedBy = [ "multi-user.target" ];
-#    wants = [ "network-online.target" ];
-#    after = [ "network-online.target" "NetworkManager-wait-online.service" ];
-#    path = with pkgs; [
-#      bash
-#      coreutils
-#      curl
-#      git
-#      gawk
-#      gnugrep
-#      gnused
-#      iproute2
-#      nftables
-#      procps
-#      util-linux
-#    ];
-#    serviceConfig = {
-#      Type = "simple";
-#      User = "root";
-#      WorkingDirectory = "/home/yoncola/zapret-discord-youtube-linux";
-#      ExecStart = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh daemon";
-#      ExecStop = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh kill";
-#      Restart = "on-failure";
-#      RestartSec = 5;
-#    };
-#  };
+#  Zapret-discord-youtube, uncomment if you live in Russia, author: https://github.com/Sergeydigl3/zapret-discord-youtube-linux
+#   systemd.services.zapret-discord-youtube = {
+#     description = "Zapret Discord/YouTube DPI circumvention service";
+#     wantedBy = [ "multi-user.target" ];
+#     wants = [ "network-online.target" ];
+#     after = [ "network-online.target" "NetworkManager-wait-online.service" ];
+#     path = with pkgs; [
+#       bash
+#       coreutils
+#       curl
+#       git
+#       gawk
+#       gnugrep
+#       gnused
+#       iproute2
+#       nftables
+#       procps
+#       util-linux
+#     ];
+#     serviceConfig = {
+#       Type = "simple";
+#       User = "root";
+#       WorkingDirectory = "/home/yoncola/zapret-discord-youtube-linux";
+#       ExecStart = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh daemon";
+#       ExecStop = "${pkgs.bash}/bin/bash /home/yoncola/zapret-discord-youtube-linux/service.sh kill";
+#       Restart = "on-failure";
+#       RestartSec = 5;
+#     };
+#   };
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -95,6 +107,7 @@
       })
     ];
   };
+
   services.displayManager.sddm.wayland.enable = false;
   services.displayManager.sddm.settings.General.DisplayServer = "x11";
   services.displayManager.sddm.settings.Theme = {
@@ -132,10 +145,10 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-# For working rbxcdn in Russia
-#  networking.extraHosts = ''
-#    18.65.39.105 tr.rbxcdn.com
-#  '';
+#  For working rbxcdn in Russia
+#   networking.extraHosts = ''
+#     18.65.39.105 tr.rbxcdn.com
+#   '';
 
 
   services.pipewire = {
@@ -178,7 +191,7 @@
     xdg-user-dirs
     trash-cli
 #    librewolf
-#   vesktop
+#    vesktop
     pavucontrol
 #    opencode
     bibata-cursors
@@ -205,9 +218,9 @@
     HYPRCURSOR_SIZE = "24";
   };
 
-  users.users.yoncola = {
+  users.users.yoncola = {                                            # Set your username
     isNormalUser = true;
-    description = "yoncola"; # Your username
+    description = "yoncola";                                         # Set your username
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     shell = pkgs.fish;
   };
@@ -220,28 +233,28 @@
     options = "--delete-older-than 14d";
   };
 
-# Firejail for secutiry
-#  programs.firejail = {
-#    enable = true;
-#    wrappedBinaries = {
-#      librewolf = {
-#        executable = "${lib.getBin pkgs.librewolf}/bin/librewolf";
-#        profile = "${pkgs.firejail}/etc/firejail/librewolf.profile";
-#      };
+#  Firejail for secutiry
+#   programs.firejail = {
+#     enable = true;
+#     wrappedBinaries = {
+#       librewolf = {
+#         executable = "${lib.getBin pkgs.librewolf}/bin/librewolf";
+#         profile = "${pkgs.firejail}/etc/firejail/librewolf.profile";
+#       };
 #
-#      freesmlauncher = {
-#        executable = "${lib.getBin inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher}/bin/freesmlauncher";
-#        extraArgs = [
-#          "--private=/mnt/disk/firejail"
-#          "--noprofile"
-#        ];
-#      };
-#    };
-#  };
+#       freesmlauncher = {
+#         executable = "${lib.getBin inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher}/bin/freesmlauncher";
+#         extraArgs = [
+#           "--private=/mnt/disk/firejail"
+#           "--noprofile"
+#         ];
+#       };
+#     };
+#   };
 
   # My second disk
   # fileSystems."/mnt/disk" = {
-  #  device = "/dev/disk/by-uuid/"; # Set your real UUID!
+  #  device = "/dev/disk/by-uuid/*"; # Set your real UUID!
   #  fsType = "btrfs";
   #  options = [
   #    "defaults"
@@ -256,5 +269,25 @@
 
   system.stateVersion = "26.05";
 }
+# Зачем читать 272 строку?
+#  _   _  ___  _ __   ___ ___ | | __ _ 
+# | | | |/ _ \| '_ \ / __/ _ \| |/ _` |
+# | |_| | (_) | | | | (_| (_) | | (_| |
+#  \__, |\___/|_| |_|\___\___/|_|\__,_|
+#  |___/                               
 
-# Зачем читать 260 строку?
+# Made by claude-code and yoncola
+
+# ⣿⣿⣿⣿⣿⢿⠿⠿⠿⠛⠛⠛⠛⠻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿
+# ⣿⣿⠟⠋⣁⠄⠄⣀⣤⣤⣤⣀⣉⣁⡀⠒⠄⠉⠛⣿⣿⣿⣿⣿
+# ⡏⢡⣴⠟⠁⠐⠉⠄⣤⣄⠉⣿⠟⢃⡄⠄⠄⢠⡀⠈⠻⣿⣿⣿
+# ⠄⢸⣤⣤⣀⠑⠒⠚⠛⣁⣤⣿⣦⣄⡉⠛⠛⠛⠉⣠⣄⠙⣿⣿
+# ⠄⣾⣿⣿⡟⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠚⣿
+# ⠄⢻⣿⣿⣷⣄⣉⠙⠛⠛⠛⠛⠛⠛⠋⣉⣉⣀⣤⠤⠄⣸⡀⢻
+# ⣇⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⢠⣶⣿⣇⠘
+# ⣿⣧⡈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⢸⣿⣿⡿⠄
+# ⣿⣿⣷⡀⠹⣿⣿⣿⣿⣿⣿⡋⠙⢻⣿⣿⣿⠟⢀⣾⣿⣿⠃⣸
+# ⣿⣿⣿⣿⣦⠈⠻⣿⣿⣿⣿⣿⣷⣤⣀⣀⣠⣤⣿⣿⠟⢁⣼⣿
+# ⣿⣿⣿⣿⣿⣿⣶⣤⣈⠙⠛⠛⠿⠿⠿⠿⠿⠛⠛⣡⣴⣿⣿⣿
+# ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣷⣶⣶⣶⣶⣶⣾⣿⣿⣿⣿⣿⣿
+
