@@ -16,8 +16,7 @@
       configurationLimit = 10;
     };
   };
-  # Use the Nixpkgs default kernel instead of the very recent latest kernel;
-  # this is a safer baseline for building the NVIDIA kernel module.
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelParams = [
@@ -178,12 +177,14 @@
     hyprpicker
     xdg-user-dirs
     trash-cli
-    # librewolf
-    # vesktop
+#    librewolf
+#   vesktop
     pavucontrol
-    # opencode
+#    opencode
     bibata-cursors
-    # flatpak
+#    flatpak
+#    chromium
+#    hydralauncher
     libxcursor
     (sddm-astronaut.override {
       embeddedTheme = "purple_leaves";
@@ -213,16 +214,34 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Периодически удалять старые поколения и собранные ими store-пути.
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
 
+# Firejail for secutiry
+#  programs.firejail = {
+#    enable = true;
+#    wrappedBinaries = {
+#      librewolf = {
+#        executable = "${lib.getBin pkgs.librewolf}/bin/librewolf";
+#        profile = "${pkgs.firejail}/etc/firejail/librewolf.profile";
+#      };
+#
+#      freesmlauncher = {
+#        executable = "${lib.getBin inputs.freesmlauncher.packages.${pkgs.system}.freesmlauncher}/bin/freesmlauncher";
+#        extraArgs = [
+#          "--private=/mnt/disk/firejail"
+#          "--noprofile"
+#        ];
+#      };
+#    };
+#  };
+
   # My second disk
   # fileSystems."/mnt/disk" = {
-  #  device = "/dev/disk/by-uuid/d5b8e95c-b27c-44c6-bb4d-3d8e5986fca4";
+  #  device = "/dev/disk/by-uuid/"; # Set your real UUID!
   #  fsType = "btrfs";
   #  options = [
   #    "defaults"
@@ -232,8 +251,10 @@
   #  ];
   # };
 
-  # Удалять неиспользуемые store-пути, не принадлежащие живым поколениям.
+  # Remove unused store paths.
   nix.settings.auto-optimise-store = true;
 
   system.stateVersion = "26.05";
 }
+
+# Зачем читать 260 строку?
