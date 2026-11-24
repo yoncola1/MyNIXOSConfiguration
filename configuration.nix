@@ -182,7 +182,6 @@
     fish
     fastfetch
     btop
-    micro
     thunar
     starship
     wl-clipboard
