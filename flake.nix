@@ -1,3 +1,17 @@
+#  
+#  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠄⠤⠀⡀⠀
+#  ⠀⡀⣀⢀⡀⢀⣀⣠⣶⣾⣿⣆⣀⣀⣀⣀⣼⣿⣶⣦⣀⡀⣀⢀⡀⣀⠀
+#  ⠙⢿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⠿⣿⣿⢿⣿⣿⣿⡿⣿⣿⣿⣿⡿⣿⡿⠋
+#  ⠀⠸⣿⠀⡀⠀⣾⣿⣿⡦⠄⠀⣸⣿⣿⣆⠀⢠⢼⣿⡥⠐⠄⠀⠀⣿⠇
+#  ⠀⠀⣿⡇⠁⢾⣿⣿⣿⣿⡇⠀⣿⣿⣿⣿⠡⢻⣾⣿⣟⣧⡆⠀⢸⣿
+#  ⠀⠀⠹⣿⣆⣀⣙⠻⠟⢋⣠⣾⣿⠛⠽⣿⣷⣣⡙⠿⢿⢋⣀⣴⣿⠋
+#  ⠀⠀⠀⠏⠛⠿⠿⠿⠿⠿⠿⠋⡁⠎⡐⢈⠛⠿⠿⠿⠿⡿⠿⠛⠇
+#  ⠀⠀⠀⢠⠀⢁⠀⠀⠓⠀⢀⣄⣐⣂⣁⣂⣠⡀⠀⠖⠀⠋⠀⠘
+#    ⠀⠀⠀⠀⠡⢊⠀⠀⠀⠀⠻⡇⠀⠀⠀⠀⡿⠃⠀⠀⠀⠂⠠
+#  ⠀⠀⠀⠀⠀⠑⢌⢔⠠⡀⡐⢈⠃⠶⡐⠌⠤⣁⢂⡐⢀⠜⠁
+#  ⠀⠀⠀⠀⠀⠀⠀⠑⠣⠒⣥⢊⡜⣤⢃⢎⣱⣐⠦⠘⠁
+#  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠈⠐⠉⠈⠁ 
+
 {
   description = "NixOS with Caelestia Dots";
 
@@ -13,7 +27,7 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    freesmlauncher.url = "github:FreesmTeam/FreesmLauncher/develop";
+    # freesmlauncher.url = "github:FreesmTeam/FreesmLauncher/develop"; Minecraft Launcher
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
