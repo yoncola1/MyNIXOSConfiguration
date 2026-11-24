@@ -85,25 +85,36 @@ hl.config({
         kb_options = "grp:alt_shift_toggle",
     },
 })
-# My monitors
-# hl.monitor({
-#     output    = "DP-2",
-#     mode      = "2560x1440@194",
-#     position  = "0x0",
-#     scale     = 1,
-# })
-# hl.monitor({
-#     output    = "DP-1",
-#     mode      = "1920x1080@144",
-#     position  = "-1080x-548",
-#     scale     = 1,
-#     transform = 1,
-# })
+-- My monitors
+-- hl.monitor({
+--     output    = "DP-2",
+--     mode      = "2560x1440@194",
+--     position  = "0x0",
+--     scale     = 1,
+-- })
+-- hl.monitor({
+--     output    = "DP-1",
+--     mode      = "1920x1080@144",
+--     position  = "-1080x-548",
+--     scale     = 1,
+--     transform = 1,
+-- })
 
-# Sensitivity
+-- Sensitivity
 hl.config({
     input = {
         sensitivity = -0.10,
         accel_profile = "flat",
     },
 })
+-- Fixing monitor
+-- hl.config({
+--    render = {
+--        direct_scanout = 0,
+--        cm_auto_hdr = 0,
+--        send_content_type = 0,
+--    },
+--    misc = {
+--        vrr = 0,
+--    },
+--})
