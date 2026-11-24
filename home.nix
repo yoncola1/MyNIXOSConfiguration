@@ -9,8 +9,8 @@ in
     inputs.caelestia-shell.homeManagerModules.default
   ];
 
-  home.username = "yoncola";
-  home.homeDirectory = "/home/yoncola";
+  home.username = "yoncola"; # Set your username
+  home.homeDirectory = "/home/yoncola"; # Set your home directory
   home.stateVersion = "26.05";
   home.backupFileExtension = "backup";
 
