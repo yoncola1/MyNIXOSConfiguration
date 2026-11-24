@@ -35,6 +35,7 @@
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
   ];
+  boot.tmp.useTmpfs = true;
 
   networking.hostName = "nixos-btw";
   networking.networkmanager.enable = true;
@@ -198,6 +199,10 @@
 #    chromium
 #    hydralauncher
     libxcursor
+    papirus-icon-theme
+    adwaita-icon-theme
+    gnome-themes-extra
+    hicolor-icon-theme
     (sddm-astronaut.override {
       embeddedTheme = "purple_leaves";
     })
@@ -215,6 +220,7 @@
     XCURSOR_SIZE = "24";
     HYPRCURSOR_THEME = "Bibata-Modern-Classic";
     HYPRCURSOR_SIZE = "24";
+    GTK_THEME = "Adwaita-dark";
   };
 
   users.users.yoncola = {                                            # Set your username
