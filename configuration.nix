@@ -36,6 +36,7 @@
     "nvidia-drm.fbdev=1"
   ];
   boot.tmp.useTmpfs = true;
+  systemd.coredump.enable = false;
 
   networking.hostName = "nixos-btw";
   networking.networkmanager.enable = true;
